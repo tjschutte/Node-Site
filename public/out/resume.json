@@ -1,0 +1,147 @@
+{
+  "name": "Tom Schutte",
+  "info": {},
+  "meta": {
+    "format": "FRESH@0.6.0",
+    "version": "0.1.0"
+  },
+  "location": {
+    "city": "Madison",
+    "region": "Wisconsin",
+    "country": "US",
+    "code": "WI 53715",
+    "address": "1134 Mound St"
+  },
+  "employment": {
+    "history": [
+      {
+        "position": "Associate Embedded Engineer",
+        "employer": "Extreme Engineering Solutions",
+        "summary": "Extreme Engineering Solutions is a single board computer design and manufacture company. Their products are used in industries like aviation, military, computing, and many more. I worked on the U-Boot bootloader team during my time here.",
+        "start": "2016-01-04",
+        "end": "2016-09-01",
+        "url": "http://www.xes-inc.com/",
+        "keywords": [],
+        "highlights": [
+          "Worked full time on embedded systems alongside professional embedded engineers",
+          "Created continuous integration builds using Jenkins, Robot, and Python",
+          "Set up system for automated testing on the projects I worked on",
+          "Researched and implemented Freescale Secure Boot technologies in U-Boot for PowerPC",
+          "Helped troubleshoot and review code to be added to repository",
+          "Assisted in onboarding new students to U-Boot team"
+        ]
+      },
+      {
+        "position": "Intern",
+        "employer": "Maverick Software Consulting",
+        "summary": "Maverick Software Consulting bridges the need for students to get on the job experience, and other companies desire for college student talent. While at maverick I worked as a student consultant for Thomson Reuters working on a law web application.",
+        "start": "2015-01-01",
+        "end": "2015-11-15",
+        "url": "http://www.mavericksoftware.com/",
+        "keywords": [],
+        "highlights": [
+          "Software Development working 20 hours a week alongside full class schedule",
+          "Contractor for Thomson Reuters, working on current production products alongside lead developers",
+          "Updated legacy code to new MVC5 formats, making product more modern",
+          "Participated in agile standup meetings discussing future plans for projects and what developers were working on",
+          "Communicated with team daily on current progress and any pain points, participating in meetings as needed",
+          "Researched and applied new technologies that had potential use and application in our product"
+        ]
+      }
+    ]
+  },
+  "education": {
+    "level": "",
+    "history": [
+      {
+        "institution": "University of Wisconsin-Madison",
+        "start": "2013-08-25",
+        "end": "2017-12-01",
+        "grade": "3.6",
+        "curriculum": [
+          "Operating Systems",
+          "Computer Architecture",
+          "Algorithms",
+          "Linear Algebra",
+          "Multivariable Calculus",
+          "Machine Organization and Programming",
+          "Digital System Design and Synthesis",
+          "Microprocessor Systems"
+        ],
+        "summary": "",
+        "area": "Computer Engineering and Computer Science",
+        "studyType": "Bachelor"
+      }
+    ]
+  },
+  "skills": {
+    "sets": [
+      {
+        "name": "Computer Languages",
+        "level": "Moderate",
+        "skills": [
+          "C",
+          "C#",
+          "Java",
+          "Python",
+          "HTML",
+          "CSS",
+          "Javascript",
+          "Verilog",
+          "sysverilog"
+        ]
+      }
+    ]
+  },
+  "recognition": [
+    {
+      "title": "Claude and Dora Richardson Scholarship",
+      "date": "2016-09-01",
+      "from": "College of Engineering",
+      "summary": ""
+    },
+    {
+      "title": "Claude and Dora Richardson Scholarship",
+      "date": "2015-09-01",
+      "from": "College of Engineering",
+      "summary": ""
+    },
+    {
+      "title": "IEEE-HKN Honor Society",
+      "date": "2015-03-01",
+      "from": "IEEE-HKN",
+      "summary": "Top quarter of juniors, top third of seniors, 2015-Present"
+    },
+    {
+      "title": "Honor List",
+      "date": "2014-11-01",
+      "from": "University of Wisconsin-Madion College of Engineering",
+      "summary": "6/6 Semesters attended"
+    }
+  ],
+  "social": [
+    {
+      "label": "LinkedIn",
+      "network": "LinkedIn",
+      "url": "https://www.linkedin.com/in/tom-schutte-422365b0",
+      "user": ""
+    },
+    {
+      "label": "Github",
+      "network": "Github",
+      "url": "https://github.com/tjschutte",
+      "user": "tjschutte"
+    }
+  ],
+  "interests": [
+    {
+      "name": "Hobbies",
+      "keywords": [
+        "Sailing",
+        "Mountain Biking",
+        "Running",
+        "Swimming"
+      ]
+    }
+  ]
+}

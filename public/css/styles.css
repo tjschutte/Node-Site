@@ -1,0 +1,77 @@
+.icon {
+	margin: 0 auto;
+
+}
+
+.icon-div {
+	min-height: 120px;
+	max-height: 120px;
+}
+
+div {
+	text-align: justify
+}
+
+body {
+	/* Making sure footer doesnt cover content */
+	padding-bottom: 55px;
+}
+
+.footer {
+	padding-top: 12px;
+	background-color: #D8D8D8;
+}
+
+.header {
+	text-align: center;
+}
+
+.p {
+	text-align: justify;
+}
+
+.button {
+	width: 100%;
+}
+
+.projects {
+	padding-bottom: 15px;
+	padding-top: 15px;
+	max-width: 256px;
+	max-height: 256px;
+}
+
+#map-container, .contact-container { 
+	height: 50em;
+}
+
+/*
+	Wiggle animation will make text wiggle back and forth.
+	Use with caution, as this can get obnoxious.... But its fun
+	and its meant to show playing around with css animations.
+*/
+.wiggle:hover {
+	animation-duration: 1s;
+	animation-iteration-count: infinite;
+	animation-name: wiggle;
+}
+
+@keyframes wiggle {
+  from {
+  	-ms-transform: rotate(7deg); /* IE 9 */
+    -webkit-transform: rotate(7deg); /* Chrome, Safari, Opera */
+    transform: rotate(7deg);
+  }
+
+  50% {
+  	-ms-transform: rotate(-7deg); /* IE 9 */
+    -webkit-transform: rotate(-7deg); /* Chrome, Safari, Opera */
+    transform: rotate(-7deg);
+  }
+
+  to {
+  	-ms-transform: rotate(7deg); /* IE 9 */
+    -webkit-transform: rotate(7deg); /* Chrome, Safari, Opera */
+    transform: rotate(7deg);
+  }
+}
