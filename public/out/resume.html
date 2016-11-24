@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-    
+
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -15,7 +15,7 @@
                 font-weight: normal;
                 font-style: normal;
             }
-            
+
             [class^="icon-"], [class*=" icon-"] {
                 /* use !important to prevent issues with browser extensions that change fonts */
                 font-family: 'icomoon' !important;
@@ -25,12 +25,12 @@
                 font-variant: normal;
                 text-transform: none;
                 line-height: 1;
-            
+
                 /* Better Font Rendering =========== */
                 -webkit-font-smoothing: antialiased;
                 -moz-osx-font-smoothing: grayscale;
             }
-            
+
             .icon-meetup .path1:before {
                 content: "\e901";
                 color: rgb(255, 255, 255);
@@ -204,8 +204,8 @@
             .icon-board:before {
                 content: "\e608";
             }
-            
-            
+
+
             .relative {
               position: relative;
             }
@@ -948,12 +948,12 @@
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="../res/resume.pdf">Resume</a></li>
                 <li><a href="">About</a></li>
-                <li><a href="../projects.html">Projects</a></li>
+                <li><a href="/projects">Projects</a></li>
             </ul>
         </div>
       </nav>
     </header>
-    
+
     <body itemscope="itemscope" itemtype="http://schema.org/Person">
         <div class="container-fluid">
             <div class="row main clearfix"><a href="#" class="js-floating-nav-trigger floating-nav-trigger"><i class="icon-bars"></i><span class="close-icon">&times;</span></a>
@@ -1240,7 +1240,7 @@
                 $( '.js-floating-nav' ).toggleClass( 'is-visible' );
                 $( '.js-floating-nav-trigger' ).toggleClass( 'is-open' );
               };
-            
+
               $( ".background-card" ).css( "min-height", window.screen.availHeight + "px" );
               $( "[data-toggle=tooltip]" ).tooltip();
               $( '.js-floating-nav-trigger' ).on( 'click', function(e) {
@@ -1248,13 +1248,13 @@
                 toggleFloatingMenu();
               });
               $( '.js-floating-nav a' ).on( 'click', toggleFloatingMenu );
-            
+
               $("#remaining-profiles").on('show.bs.collapse', function() {
                 $( '.js-profiles-collapse > i' )
                   .removeClass( 'icon-chevron-down' )
                   .addClass( 'icon-chevron-up' );
               });
-            
+
               $("#remaining-profiles").on('hidden.bs.collapse', function() {
                 $( '.js-profiles-collapse > i' )
                   .removeClass( 'icon-chevron-up' )

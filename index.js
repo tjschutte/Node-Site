@@ -11,6 +11,9 @@ const mail = require("nodemailer").mail;
  * Controllers (route handlers).
  */
 const indexController = require('./controllers/index');
+const contactController = require('./controllers/contact');
+const projectsController = require('./controllers/projects');
+
 
 /**
  * Create Express server.
@@ -39,7 +42,9 @@ app.use(bodyParser.json());
  * Primary app routes.
  */
 app.get('/', indexController.index);
-app.post('/', indexController.postIndex);
+app.get('/contact', contactController.getContact);
+app.post('/contact', contactController.postContact);
+app.get('/projects', projectsController.getProjects);
 
 /**
  * Start Express server.
