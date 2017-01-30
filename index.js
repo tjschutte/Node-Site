@@ -5,7 +5,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const fs = require('fs');
-const mail = require("nodemailer").mail;
 
 /**
  * Controllers (route handlers).
