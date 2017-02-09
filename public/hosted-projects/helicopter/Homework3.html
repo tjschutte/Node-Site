@@ -1,0 +1,53 @@
+<!--
+Work done by:
+Tom Schutte
+tjschutte@wisc.edu
+NETID: tjschutte
+CSID: schutte
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="description" content="Canvas Drawing Example">
+        <meta charset="utf-8">
+        <script src="Homework3.js"></script>
+        <script src="twgl-full.min.js"></script>
+        <link rel="stylesheet" href="../../css/bootstrap.min.css">
+        <link rel="stylesheet" href="../../css/styles.css">
+        <script src="../../js/common.js"></script>
+        <title>Tom Schutte Homework 3</title>
+    </head>
+    <header>
+      <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="../../">Tom Schutte</a>
+          </div>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../res/resume.pdf">Resume</a></li>
+            <li><a href="../../out/resume.html">About</a></li>
+            <li><a href="../../projects">Projects</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <body>
+        <p>
+            <canvas id="myCanvas" width="600" height="600"  class="center-block"></canvas>
+        </p>
+        <p>
+            <input id="slider" type="range" min="1" max="10000" /> Pitch
+        </p>
+        <p>
+            <input id="rotation" type="range" min="0" max="90" /> Yaw
+        </p>
+        <p>
+            <input type="checkbox" id="sound">Sound? (Warning: loud!)
+        </p>
+        <div class="footer navbar-fixed-bottom text-center">
+          <div class="container">
+            <div class="text-center" id="YEAR" style="padding-bottom: 15px"></div>
+          </div>
+        </div>
+    </body>
+</html>
