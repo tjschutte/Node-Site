@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="description" content="Spinning cube example">
+  <meta charset="utf-8">
+  <title>WebGL</title>
+  <script src='perlin.js'></script>
+
+  <script id="vs" type="not-js">
+    // From other shader
+    attribute vec3 vPosition;
+    attribute vec3 vColor;
+
+    precision highp float;
+    attribute vec3 normal;
+
+    uniform mat4 normalMatrix;
+    uniform mat4 modelViewMatrix;
+    uniform mat4 projectionMatrix;
+    varying vec3 fColor;
+    varying vec3 fNormal;
+    uniform mat4 uMVP;
+
+    const float ambient_coeff   = 0.4;
+    const float specular_coeff  = 1.0;
+    const float specular_exp    = 32.0;
+    const vec3  light_direction = vec3(-10.0,100.0,0.0); // stationary light
+    const vec3  light_color     = vec3(1.0,1.0,1.0);
+
+    void main(void) {
+    /*
+      gl_Position = uMVP * vec4(vPosition, 1.0);
+      fColor = vColor;
+    */
+      fNormal = normalize( mat3(normalMatrix) * normal);
+      vec4 pos = modelViewMatrix * vec4(vPosition, 1.0);
+      gl_Position = uMVP * vec4(vPosition, 1.0);
+
+      vec3 l = normalize(light_direction);
+      vec3 n = normalize(fNormal * normal);
+      vec3 e = normalize(-pos.xyz);
+      vec3 h = normalize (e + l);
+
+      vec3 ambient_color  = ambient_coeff  * vColor;
+      vec3 specular_color = specular_coeff * pow(max(0.0,dot(n,h)), specular_exp) * vColor;
+
+      fColor = ambient_color + specular_color;
+
+    }
+  </script>
+
+  <script id="fs" type="not-js">
+    precision highp float;
+    varying vec3 fColor;
+
+    void main(void) {
+      gl_FragColor = vec4(fColor, 1.0);
+    }
+  </script>
+  <link rel="stylesheet" href="../../css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../css/styles.css">
+</head>
+<header>
+  <nav class="navbar navbar-default" role="navigation">
+	<div class="container">
+	  <div class="navbar-header">
+		<a class="navbar-brand" href="../../">Tom Schutte</a>
+	  </div>
+	  <ul class="nav navbar-nav navbar-right">
+		<li><a href="../../res/resume.pdf">Resume</a></li>
+		<li><a href="../../out/resume.html">About</a></li>
+		<li><a href="../../projects">Projects</a></li>
+	  </ul>
+	</div>
+  </nav>
+</header>
+
+<body>
+  <script src="../../js/common.js"></script>
+  <canvas id="mycanvas" width="800" height="600"></canvas><br>
+  <script src="Homework6.js"></script>
+  <script src="twgl-full.min.js"></script>
+  <script src="../../js/common.js"></script>
+  <p>
+    <input id="zoom" type="text"/> field of view -> beware numbers under 1.1
+  </p>
+  <p>
+    <input id="rotation" type="range" min="0" max="360" /> rotation
+  </p>
+  <p>
+    <input id="cameraHeight" type="range" min="0" max="800" /> Camera height
+  </p>
+  <p>
+    Change what the Camera is looking at:
+    <input id="targetX" type="text"/> X
+    <input id="targetY" type="text"/> Y
+    <input id="targetZ" type="text"/> Z
+  </p>
+  <p>
+      <input id="wireframe" type="checkbox"/> ocean wirefram
+  </p>
+  <p id="fps"></P>
+  <p> The ocean is made using a perlin noise script by someone else, but I had to figure out a way to make it not look
+      like chaos and to color it in some cool way.  My aim was some cool terrain generation,
+      in this case a helicopter over an ocean
+  </p>
+	  <div class="footer navbar-fixed-bottom text-center">
+		<div class="container">
+		  <div class="text-center" id="YEAR" style="padding-bottom: 15px"></div>
+		</div>
+	  </div>
+  </body>
+</html>

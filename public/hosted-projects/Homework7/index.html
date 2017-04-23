@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Graphics town framework code by Mike Gleicher
+  -- written October, 2015
+  -->
+<head>
+    <meta charset="UTF-8">
+    <title>GraphicsTown JS 2017! - Tom Schutte</title>
+</head>
+<body>
+<!-- load this stuff first -->
+<script src="Libraries/twgl-full.js"></script>
+<script src="Libraries/panel.js"></script>
+<script src="Libraries/arcball.js"></script>
+<!--
+<script src="Libraries/perlin.js"></script>
+-->
+<!-- Better helper lib with better perlin noise.  This is an overall very powerful lib -->
+<script src="Libraries/p5.js"></script>
+<script src="grobject.js"></script>
+
+<!-- This is where we load the objects for the world -->
+<script src="ExampleObjects/plane.js"></script>
+<script src="ExampleObjects/cube.js"></script>
+<script src="ExampleObjects/metalcube.js"></script>
+<script src="ExampleObjects/cloud.js"></script>
+<script src="ExampleObjects/tree.js"></script>
+<script src="ExampleObjects/pinetree.js"></script>
+
+<!-- File with the actual object creation and comments about scene -->
+<script src="scenedescription.js"></script>
+
+<!-- This gets loaded LAST (actually, it probably doesn't have to) -->
+<script src="graphicstown.js"></script>
+<p>I put a description of what I did in the readme. NOTE: a lot of this stuff is random generated, so if it looks boring, refresh the page</p>
+</body>
+
+<script id="cube-vs" type="notjs">
+    precision highp float;
+
+    attribute vec3 vpos;
+    attribute vec3 vnormal;
+    varying vec3 outColor;
+
+    uniform mat4 view;
+    uniform mat4 proj;
+    uniform mat4 model;
+    uniform vec3 lightdir;
+    uniform vec3 cubecolor;
+
+    const float ambient_coeff   = 0.25;
+    const float specular_coeff  = 1.0;
+    const float specular_exp    = 32.0;
+    const vec3  light_direction = vec3(-1.0,1.0,1.0); // stationary light
+    const vec3  light_color     = vec3(1.0,1.0,1.0);
+
+    void main(void) {
+        gl_Position = proj * view * model * vec4(vpos, 1.0);
+        vec4 normal = normalize(model * vec4(vnormal,0.0));
+        float diffuse = .5 + .5*abs(dot(normal, vec4(lightdir,0.0)));
+
+        vec4 pos = model * vec4(vpos, 1.0);
+
+        vec3 l = normalize(light_direction);
+        vec3 e = normalize(-pos.xyz);
+        vec3 h = normalize (e + l);
+
+        vec3 specular_color = specular_coeff * pow(max(0.0,dot(normal.xyz,h)), specular_exp) * cubecolor;
+
+        outColor = cubecolor * (diffuse + specular_color);
+    }
+</script>
+<script id="cube-fs" type="notjs">
+    precision highp float;
+    varying vec3 outColor;
+    void main(void) {
+        gl_FragColor = vec4(outColor, 1.0);
+    }
+</script>
+
+<script id="tree-vs" type="notjs">
+    precision highp float;
+
+    attribute vec3 vpos;
+    attribute vec3 vnormal;
+    attribute vec3 vcolor;
+    varying vec3 outColor;
+
+    uniform mat4 view;
+    uniform mat4 proj;
+    uniform mat4 model;
+    uniform vec3 lightdir;
+
+
+    void main(void) {
+        gl_Position = proj * view * model * vec4(vpos, 1.0);
+        vec4 normal = normalize(model * vec4(vnormal,0.0));
+        float diffuse = .5 + .5*abs(dot(normal, vec4(lightdir,0.0)));
+        outColor = vcolor * diffuse;
+    }
+</script>
+<script id="tree-fs" type="notjs">
+    precision highp float;
+    varying vec3 outColor;
+    void main(void) {
+        gl_FragColor = vec4(outColor, 1.0);
+    }
+</script>
+
+<script id="specular-vs" type="notjs">
+    precision highp float;
+
+    attribute vec3 vpos;
+    attribute vec3 vnormal;
+	attribute vec3 vcolor;
+	uniform vec3 cubecolor;
+
+    varying vec3 fColor;
+	varying vec3 fPosition;
+	varying vec4 fNormal;
+
+    uniform mat4 view;
+    uniform mat4 proj;
+    uniform mat4 model;
+    const vec3 lightdir = vec3(1.0,-1.0,0.0); // stationary light
+
+      void main(void) {
+		fNormal = normalize(model * vec4(vnormal, 0.0));
+        gl_Position = proj * view * model * vec4(vpos, 1.0);
+	    fColor = cubecolor;
+		fPosition = vpos.xyz;
+      }
+</script>
+
+<script id="specular-fs" type="notjs">
+    precision highp float;
+    varying vec3 fColor;
+	varying vec3 fPosition;
+	varying vec4 fNormal;
+
+    uniform mat4 view;
+    uniform mat4 proj;
+    uniform mat4 model;
+    const vec3 lightdir = vec3(0.0,1.0,0.0); // stationary light directly over head
+
+    void main(void) {
+		//vector from position to light source
+		vec3 lightVector = normalize(lightdir - fPosition);
+		//ambient light
+		float ambient = .2;
+		//diffuse light
+		float diffuseIntensity = .5;
+		float diffuse = diffuseIntensity * max(0.0, dot(vec3(fNormal), lightVector));
+		//reflection vector
+		vec3 reflectionVec = reflect(-lightVector, vec3(fNormal));
+		//camera vector
+		vec3 cameraVec = normalize(vec3(view) - fPosition);
+		//specular light
+		float specular = 0.5;
+		float specularIntensity = 1.5;
+		float shineIntensity = .4;
+		if(diffuse > 0.0) {
+			specular = specularIntensity * pow(max(0.0, dot(cameraVec,reflectionVec)), shineIntensity);
+		}
+
+		//total light
+		float light = ambient + diffuse + specular;
+
+	    gl_FragColor = vec4(fColor * light, 1.0);
+    }
+</script>
+
+<!-- Special Ground Plane Shader - makes a boring
+  -- checkerboard
+  -->
+<script id="ground-vs" type="not-js">
+    precision highp float;
+
+    attribute vec3 vpos;
+    varying vec3 outPos;
+
+    uniform mat4 view;
+    uniform mat4 proj;
+
+    void main(void) {
+        gl_Position = proj * view * vec4(vpos, 1.0);
+        outPos = vpos;
+    }
+</script>
+<script id="ground-fs" type="notjs">
+    // note this is used for more than just the cube
+    precision highp float;
+    varying vec3 outPos;
+    void main(void) {
+        float xs = step(1.0,mod(outPos.x,2.0));
+        float zs = step(1.0,mod(outPos.z,2.0));
+        float ss = (xs>.5) ? zs : 1.0-zs;
+        gl_FragColor = mix(vec4(0.5,0.5,0.5,1),
+                           vec4(0.3,0.5,0.4,1),
+                           ss
+                           );
+
+    }
+</script>
+
+</html>
