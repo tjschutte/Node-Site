@@ -44,6 +44,8 @@ app.get('/', indexController.index);
 app.get('/contact', contactController.getContact);
 app.post('/contact', contactController.postContact);
 app.get('/projects', projectsController.getProjects);
+// 404 page
+app.get('*', indexController.pagenotfound);
 
 /**
  * Start Express server.
