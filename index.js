@@ -44,6 +44,9 @@ app.get('/', indexController.index);
 app.get('/contact', contactController.getContact);
 app.post('/contact', contactController.postContact);
 app.get('/projects', projectsController.getProjects);
+
+app.get('/rachelisliterallydying', indexController.bodycountget);
+app.post('/rachelisliterallydying', indexController.bodycountpost);
 // 404 page
 app.get('*', indexController.pagenotfound);
 
