@@ -1,6 +1,7 @@
 
 const config = require('../config.json');
 const nodemailer = require('nodemailer');
+const dateFormat = require('dateformat');
 
 var transporter = nodemailer.createTransport('smtps://' + config.email + ':' + config.email_password + '@smtp.gmail.com');
 
@@ -9,8 +10,13 @@ var transporter = nodemailer.createTransport('smtps://' + config.email + ':' + c
  * contact page.
  */
 exports.getContact = (req, res) => {
-  res.render('contact.html');
-  console.log('GET: /contact');
+    var ip = req.headers['x-forwarded-for'] ||
+    	req.connection.remoteAddress ||
+    	req.socket.remoteAddress ||
+     	req.connection.socket.remoteAddress;
+    console.log('GET: /contact from', ip, " on ", dateFormat(new Date(), "dddd, mmmm dS, yyyy, h:MM:ss TT"));
+    res.render('contact.html');
+
 };
 
 /*
