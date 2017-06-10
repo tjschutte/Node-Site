@@ -1,3 +1,4 @@
+var dateFormat = require('dateformat');
 /**
  * GET
  * Home page.
@@ -13,19 +14,22 @@ exports.pagenotfound = (req, res) => {
 };
 
 var count = count || 0;
+var date = date || new Date();
 
 exports.bodycountget = (req, res) => {
 	console.log('GET: /rachelisliterallydying');
 	res.render('deaths.html', {
-		body: count
+		body: count,
+		time: dateFormat(date, "dddd, mmmm dS, yyyy, h:MM:ss TT")
 	});
 };
 
 exports.bodycountpost = (req, res) => {
 	console.log('POST: /rachelisliterallydying');
 	count++;
-	console.log(count);
+	date = new Date();
 	res.render('deaths.html', {
-		body: count
+		body: count,
+		time: dateFormat(date, "dddd, mmmm dS, yyyy, h:MM:ss TT")
 	});
 };

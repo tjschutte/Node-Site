@@ -18,7 +18,7 @@ const projectsController = require('./controllers/projects');
  * Create Express server.
  */
 const app = express();
-app.set('port', process.env.PORT || 8080);
+app.set('port', process.env.PORT || 80);
 app.set('views', __dirname + '/views');
 app.engine('html', require('ejs').renderFile);
 
