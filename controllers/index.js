@@ -23,6 +23,7 @@ exports.pagenotfound = (req, res) => {
 
 var count = count || 0;
 var date = date || new Date();
+date.setHours(date.getHours() - 7);
 
 exports.bodycountget = (req, res) => {
 	var ip = req.headers['x-forwarded-for'] ||
@@ -31,6 +32,7 @@ exports.bodycountget = (req, res) => {
 		req.connection.socket.remoteAddress;
 	console.log('GET: /rachelisliterallydying from', ip, " on ", dateFormat(new Date(), "dddd, mmmm dS, yyyy, h:MM:ss TT"));
 
+	//date.setHours(date.getHours() - 7);
 	res.render('deaths.html', {
 		body: count,
 		time: dateFormat(date, "dddd, mmmm dS, yyyy, h:MM:ss TT")
@@ -42,6 +44,7 @@ exports.bodycountpost = (req, res) => {
 
 	count++;
 	date = new Date();
+	date.setHours(date.getHours() - 7);
 	res.render('deaths.html', {
 		body: count,
 		time: dateFormat(date, "dddd, mmmm dS, yyyy, h:MM:ss TT")
