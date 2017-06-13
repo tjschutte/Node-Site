@@ -13,6 +13,15 @@
     <form method="post" action="/rachelisliterallydying">
         <p>Body count is: <%= body %></p>
         <p>Most recent death: <%= time %></p>
+        <p>Cause of Death: <input type="text" name="cod[val]"></p>
         <input type="submit" class="btn btn-default col-md-12">
     </form>
+    <%if (locals.deaths) { %>
+        <h2>List of recent deaths: </h2>
+        <% deaths.forEach(function(death) { %>
+            <p>
+                Death: <%= death.count %>, Time of death: <%= death.tod %>, Cause of death: <%= death.cod %>
+            </p>
+        <% }); %>
+    <% } %>
 </body>
