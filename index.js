@@ -11,18 +11,19 @@ const fs = require('fs');
  */
 const indexController = require('./controllers/index');
 const contactController = require('./controllers/contact');
+const blogController = require('./controllers/blog');
 const projectsController = require('./controllers/projects');
-
 
 /**
  * Create Express server.
  */
 const app = express();
-app.set('port', process.env.PORT || 80);
+app.set('port', process.env.PORT || 8080);
 app.set('views', __dirname + '/views');
 app.engine('html', require('ejs').renderFile);
 
-app.use(express.static(path.join(__dirname, 'public'))); // space for images and static stuff
+//app.use(express.static(path.join(__dirname, 'public'))); // space for images and static stuff
+app.use('/static', express.static('public'))
 
 /** bodyParser.urlencoded(options)
 * Parses the text as URL encoded data (which is how browsers tend to send form data from regular forms set to POST)
@@ -44,9 +45,12 @@ app.get('/', indexController.index);
 app.get('/contact', contactController.getContact);
 app.post('/contact', contactController.postContact);
 app.get('/projects', projectsController.getProjects);
+app.get('/blog', blogController.getBlog);
+app.get('/getPost', blogController.getPost);
 
 app.get('/rachelisliterallydying', indexController.bodycountget);
 app.post('/rachelisliterallydying', indexController.bodycountpost);
+
 // 404 page
 app.get('*', indexController.pagenotfound);
 

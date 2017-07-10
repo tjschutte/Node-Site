@@ -15,6 +15,9 @@ exports.index = (req, res) => {
 	res.render('index.html');
  };
 
+/**
+	For the 404 page. Still not sure how I want to handle this
+*/
 exports.pagenotfound = (req, res) => {
 	var ip = req.headers['x-forwarded-for'] ||
 		req.connection.remoteAddress ||
