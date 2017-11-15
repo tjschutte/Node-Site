@@ -5,6 +5,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const fs = require('fs');
+const https = require('https');
+const http = require('http');
+const forceSsl = require('express-force-ssl');
 
 /**
  * Controllers (route handlers).
@@ -14,11 +17,19 @@ const contactController = require('./controllers/contact');
 const blogController = require('./controllers/blog');
 const projectsController = require('./controllers/projects');
 
+const key = fs.readFileSync('encryption/private.key');
+const cert = fs.readFileSync('encryption/server.crt' );
+
+var options = {
+  key: key,
+  cert: cert,
+};
+
 /**
  * Create Express server.
  */
 const app = express();
-app.set('port', process.env.PORT || 8080);
+app.set('port', process.env.PORT || 443);
 app.set('views', __dirname + '/views');
 app.engine('html', require('ejs').renderFile);
 
@@ -57,8 +68,14 @@ app.get('*', indexController.pagenotfound);
 /**
  * Start Express server.
  */
-app.listen(app.get('port'), () => {
-  console.log('Express server listening on port %d in %s mode', app.get('port'), app.get('env'));
-});
+//app.listen(app.get('port'), () => {
+//  console.log('Express server listening on port %d in %s mode', app.get('port'), app.get('env'));
+//});
 
+// Force use to use https
+app.use(forceSsl);
+
+https.createServer(options, app).listen(443);
+http.createServer(app).listen(80);
+console.log('Express server listening');
 module.exports = app;
