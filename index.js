@@ -33,8 +33,9 @@ app.set('port', process.env.PORT || 443);
 app.set('views', __dirname + '/views');
 app.engine('html', require('ejs').renderFile);
 
-//app.use(express.static(path.join(__dirname, 'public'))); // space for images and static stuff
 app.use('/static', express.static('public'))
+// Force use to use https
+app.use(forceSsl);
 
 /** bodyParser.urlencoded(options)
 * Parses the text as URL encoded data (which is how browsers tend to send form data from regular forms set to POST)
@@ -72,8 +73,7 @@ app.get('*', indexController.pagenotfound);
 //  console.log('Express server listening on port %d in %s mode', app.get('port'), app.get('env'));
 //});
 
-// Force use to use https
-app.use(forceSsl);
+
 
 https.createServer(options, app).listen(443);
 http.createServer(app).listen(80);
