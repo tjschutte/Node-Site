@@ -19,6 +19,7 @@
     "mustache": "^2.3.0",
     "nodemailer": "^2.6.4",
     "path": "^0.12.7",
+    "serve-favicon": "^2.4.5",
     "time": "^0.12.0"
   }
 }

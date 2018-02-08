@@ -16,7 +16,7 @@
 </head>
 
 <!-- get the latest post first -->
-<body onload="getPost(0)">
+<body>
     <header>
       <nav class="navbar navbar-default" role="navigation">
         <div class="container">
@@ -46,11 +46,11 @@
                     </ul>
                     </select>
                     <button class="btn btn" type="button" onclick="getPost(-1)">Next Post</button>
+                    <!-- Where content goes! -->
+                    <div id="post">
+                        <h2 class="text-center">Loading post...</h2>
+                    </div>
                 </center>
-                <!-- Where content goes! -->
-                <div id="post">
-                    <h2>Loading post...</h2>
-                </div>
             </section>
         </div>
     </div>
@@ -61,3 +61,6 @@
         </div>
     </div>
 </body>
+<script>
+    getPost(0);
+</script>

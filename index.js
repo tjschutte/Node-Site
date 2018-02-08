@@ -8,6 +8,7 @@ const fs = require('fs');
 const https = require('https');
 const http = require('http');
 const forceSsl = require('express-force-ssl');
+const favicon = require('serve-favicon');
 
 /**
  * Controllers (route handlers).
@@ -29,11 +30,12 @@ var options = {
  * Create Express server.
  */
 const app = express();
-app.set('port', process.env.PORT || 443);
+app.set('port', process.env.PORT || 8080);
 app.set('views', __dirname + '/views');
 app.engine('html', require('ejs').renderFile);
 
-app.use('/static', express.static('public'))
+app.use('/static', express.static('public'));
+app.use(favicon(__dirname + '/public/res/photos/favicon.ico'));
 // Force use to use https
 app.use(forceSsl);
 
@@ -60,19 +62,17 @@ app.get('/projects', projectsController.getProjects);
 app.get('/blog', blogController.getBlog);
 app.get('/getPost', blogController.getPost);
 
-app.get('/rachelisliterallydying', indexController.bodycountget);
-app.post('/rachelisliterallydying', indexController.bodycountpost);
-
 // 404 page
 app.get('*', indexController.pagenotfound);
 
 /**
  * Start Express server.
  */
-//app.listen(app.get('port'), () => {
-//  console.log('Express server listening on port %d in %s mode', app.get('port'), app.get('env'));
-//});
-
+/*
+app.listen(app.get('port'), () => {
+  console.log('Express server listening on port %d in %s mode', app.get('port'), app.get('env'));
+});
+*/
 
 
 https.createServer(options, app).listen(443);
