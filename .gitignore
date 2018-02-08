@@ -2,3 +2,4 @@ config.json
 deathsfile.json
 .idea/*
 node_modules
+encryption/*
