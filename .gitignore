@@ -1,5 +1,9 @@
+# Files
 config.json
 deathsfile.json
-.idea/*
-node_modules
-encryption/*
+
+# Directories
+.idea/
+node_module/
+node_modules/
+encryption/
