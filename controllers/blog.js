@@ -1,35 +1,68 @@
-const fs = require('fs');
-const posts = require('../posts.json');
-
+var AWS = require('aws-sdk');
+AWS.config.update({ region: 'us-east-2' });
+var dynamodb = new AWS.DynamoDB({ apiVersion: '2012-10-08' });
 /**
  * GET /
  * Blog page.
  */
 exports.getBlog = (req, res) => {
-    res.render('blog.html', { posts: posts.content });
+    /**
+     * Plan:
+     * When you come to this page, render a generic page with the newest post and then a bunch of link to other posts
+    */
+
+    var params = {
+        TableName: "BlogPostTable"
+    };
+    dynamodb.describeTable(params, function (err, data) {
+        if (err) console.log(err, err.stack); // an error occurred
+        else console.log(data);           // successful response
+    });
+    res.render('blog.html');
     console.log('GET: /Blog');
 };
 
-/**
- *
- * AJAX
- */
-exports.getPost = (req, res) => {
-	res.status(200);
-	res.readyState = 4;
-    var postid = parseInt(req.query.data);
-    console.log('Retrieving post: ', postid);
+exports.getBlogPost = (req, res) => {
+    // /blog/_______ will let you go directly to a post titled _______
+    var url = req.url;
+    var title = url.substring(url.lastIndexOf("/") + 1);
+    url = url.substring(0, url.lastIndexOf("/"));
+    title = replaceAll(title, "_", " ");
+    title = title.toLowerCase(url.lastIndexOf("/"));
 
-    // bounds checking
-    if (postid < 0)
-        postid = 0;
-    else if (postid > posts.content.length - 1)
-        postid = parseInt(posts.content.length - 1);
+    date = url.substring(url.lastIndexOf("/") + 1);
+    console.log("Date:", date);
+    console.log("Title:", title);
 
-    fs.readFile(posts.content[postid].location, 'UTF-8', function read(err, data) {
+    console.log('GET:', url);
+
+    var params = {
+        Key: {
+            "Title": {
+                S: title
+            },
+            "Date": {
+                S: date
+            },
+        },
+        TableName: "BlogPostTable"
+    };
+    dynamodb.getItem(params, function (err, data) {
         if (err) {
-            throw err;
+            console.log(err, err.stack);
+            res.render('404.html');
+        } else {
+            if (data.Item != undefined) {
+                console.log(data);
+                res.render('blog.html');
+            } else {
+                console.log("Could not find post:", title);
+                res.render('404.html');
+            }
         }
-        res.send({ html: data, postid: postid, posts: posts.content });
     });
+};
+
+function replaceAll(str, find, replace) {
+    return str.replace(new RegExp(find, 'g'), replace);
 };

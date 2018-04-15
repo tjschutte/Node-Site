@@ -30,13 +30,12 @@ var options = {
  * Create Express server.
  */
 const app = express();
-app.set('port', process.env.PORT || 8080);
 app.set('views', __dirname + '/views');
 app.engine('html', require('ejs').renderFile);
 
 app.use('/static', express.static('public'));
 app.use(favicon(__dirname + '/public/res/photos/favicon.ico'));
-// Force use to use https
+// Force us to use https
 app.use(forceSsl);
 
 /** bodyParser.urlencoded(options)
@@ -60,20 +59,10 @@ app.get('/contact', contactController.getContact);
 app.post('/contact', contactController.postContact);
 app.get('/projects', projectsController.getProjects);
 app.get('/blog', blogController.getBlog);
-app.get('/getPost', blogController.getPost);
+app.get('/blog/*', blogController.getBlogPost);
 
 // 404 page
 app.get('*', indexController.pagenotfound);
-
-/**
- * Start Express server.
- */
-/*
-app.listen(app.get('port'), () => {
-  console.log('Express server listening on port %d in %s mode', app.get('port'), app.get('env'));
-});
-*/
-
 
 https.createServer(options, app).listen(443);
 http.createServer(app).listen(80);

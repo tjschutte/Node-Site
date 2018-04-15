@@ -1,6 +1,6 @@
 {
   "name": "site",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Personal website made in node",
   "main": "index.js",
   "scripts": {
@@ -9,17 +9,15 @@
   "author": "Tom Schutte",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.224.1",
     "body-parser": "^1.15.2",
     "dateformat": "^2.0.0",
     "ejs": "^2.5.2",
     "express": "^4.14.0",
+    "express-force-ssl": "^0.3.2",
     "fs": "0.0.1-security",
     "https": "^1.0.0",
-    "jade": "^1.11.0",
-    "mustache": "^2.3.0",
     "nodemailer": "^2.6.4",
-    "path": "^0.12.7",
-    "serve-favicon": "^2.4.5",
-    "time": "^0.12.0"
+    "serve-favicon": "^2.4.5"
   }
 }
