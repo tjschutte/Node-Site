@@ -15,11 +15,34 @@ exports.getBlog = (req, res) => {
         TableName: "BlogPostTable"
     };
     dynamodb.describeTable(params, function (err, data) {
-        if (err) console.log(err, err.stack); // an error occurred
-        else console.log(data);           // successful response
+        if (err) {
+            console.log(err, err.stack);
+        } else {
+            console.log(data);
+
+            var numPosts = data.Table.ItemCount;
+
+            var num = numPosts - 100;
+
+            var params = {
+                ExpressionAttributeValues: {
+                    ":ID": {
+                        N: String(num)
+                    }
+                },
+                FilterExpression: "ID >= :ID",
+                TableName: "BlogPostTable"
+            };
+            dynamodb.scan(params, function (err, data) {
+                if (err) {
+                    console.log(err, err.stack);
+                } else {
+                    res.render('blog.html', { posts: data.Items });
+                    console.log('GET: /Blog');
+                }
+            });
+        }
     });
-    res.render('blog.html');
-    console.log('GET: /Blog');
 };
 
 exports.getBlogPost = (req, res) => {
@@ -28,13 +51,14 @@ exports.getBlogPost = (req, res) => {
     var title = url.substring(url.lastIndexOf("/") + 1);
     url = url.substring(0, url.lastIndexOf("/"));
     title = replaceAll(title, "_", " ");
+    title = decodeURI(title);
     title = title.toLowerCase(url.lastIndexOf("/"));
 
     date = url.substring(url.lastIndexOf("/") + 1);
     console.log("Date:", date);
     console.log("Title:", title);
 
-    console.log('GET:', url);
+    console.log('GET:/' + date + "/" + title);
 
     var params = {
         Key: {
@@ -53,8 +77,7 @@ exports.getBlogPost = (req, res) => {
             res.render('404.html');
         } else {
             if (data.Item != undefined) {
-                console.log(data);
-                res.render('blog.html');
+                res.render('post.html', { post: data.Item });
             } else {
                 console.log("Could not find post:", title);
                 res.render('404.html');

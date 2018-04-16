@@ -35,6 +35,7 @@ app.engine('html', require('ejs').renderFile);
 
 app.use('/static', express.static('public'));
 app.use(favicon(__dirname + '/public/res/photos/favicon.ico'));
+
 // Force us to use https
 app.use(forceSsl);
 
