@@ -47,10 +47,12 @@
                     Below is a list of posts ordered by date. I don't post often, and I don't post much... But it't better than nothing!
                 </p>
                 <% posts.forEach(function(post, index) { %>
+                    <%if (post.Enabled.BOOL) { %>
                     <h3>
                         <a href="/blog/<%= post.Date.S %>/<%= post.Title.S %>"</a><%= post.Title.S %></a>
                     </h3>
-                <% }); %>
+                    <% } %>
+                <% }) %>
             </section>
         </div>
     </div>

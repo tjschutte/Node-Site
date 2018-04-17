@@ -38,6 +38,7 @@ exports.getBlog = (req, res) => {
                     console.log(err, err.stack);
                 } else {
                     res.render('blog.html', { posts: data.Items });
+                    console.log(data.Items[0]);
                     console.log('GET: /Blog');
                 }
             });
