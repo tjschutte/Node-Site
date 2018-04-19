@@ -12,7 +12,7 @@ exports.getBlog = (req, res) => {
     */
 
     var params = {
-        TableName: "BlogPostTable"
+        TableName: "Blog_Posts"
     };
     dynamodb.describeTable(params, function (err, data) {
         if (err) {
@@ -31,14 +31,19 @@ exports.getBlog = (req, res) => {
                     }
                 },
                 FilterExpression: "ID >= :ID",
-                TableName: "BlogPostTable"
+                TableName: "Blog_Posts"
             };
             dynamodb.scan(params, function (err, data) {
                 if (err) {
                     console.log(err, err.stack);
                 } else {
+                    // Sort the data
+                    console.log("Presort", data.Items);
+                    postLinks = data.Items.sort(function(a, b) {
+                        return parseInt(b.ID.N) - parseInt(a.ID.N);
+                    });
+                    console.log("Postsort", data.Items);
                     res.render('blog.html', { posts: data.Items });
-                    console.log(data.Items[0]);
                     console.log('GET: /Blog');
                 }
             });
@@ -53,35 +58,35 @@ exports.getBlogPost = (req, res) => {
     url = url.substring(0, url.lastIndexOf("/"));
     title = replaceAll(title, "_", " ");
     title = decodeURI(title);
-    title = title.toLowerCase(url.lastIndexOf("/"));
 
-    date = url.substring(url.lastIndexOf("/") + 1);
-    console.log("Date:", date);
+    id = url.substring(url.lastIndexOf("/") + 1);
+    console.log("ID:", id);
     console.log("Title:", title);
 
-    console.log('GET:/' + date + "/" + title);
+    console.log('GET:/' + id + "/" + title);
 
     var params = {
         Key: {
             "Title": {
                 S: title
             },
-            "Date": {
-                S: date
+            "ID": {
+                N: id
             },
         },
-        TableName: "BlogPostTable"
+        TableName: "Blog_Posts"
     };
     dynamodb.getItem(params, function (err, data) {
         if (err) {
             console.log(err, err.stack);
-            res.render('404.html');
+            res.render('404_blog.html');
         } else {
             if (data.Item != undefined) {
                 res.render('post.html', { post: data.Item });
             } else {
+                console.log(data);
                 console.log("Could not find post:", title);
-                res.render('404.html');
+                res.render('404_blog.html');
             }
         }
     });

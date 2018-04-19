@@ -48,7 +48,7 @@
                 <% posts.forEach(function(post, index) { %>
                     <%if (post.Enabled.BOOL) { %>
                     <h3>
-                        <a href="/blog/<%= post.Date.S %>/<%= post.Title.S %>"</a><%= post.Title.S %></a>
+                        <a href="/blog/<%= post.ID.N %>/<%= post.Title.S %>"</a><%= post.Title.S %></a>
                     </h3>
                     <% } %>
                 <% }) %>
