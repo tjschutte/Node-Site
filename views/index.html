@@ -1,106 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="static/css/bootstrap.min.css">
-	<link rel="stylesheet" href="static/css/styles.css">
-	<script src="static/js/common.js"></script>
-	<title>Tom Schutte</title>
-</head>
-
-<body>
-	<header>
-		<nav class="navbar navbar-default" role="navigation">
-			<div class="container">
-				<div class="navbar-header">
-					<a class="navbar-brand" href="">Tom Schutte</a>
-				</div>
-				<ul class="nav navbar-nav navbar-right">
-					<li>
-						<a href="blog">Blog</a>
-					</li>
-					<li>
-						<a href="static/res/resume.pdf">Resume</a>
-					</li>
-					<li>
-						<a href="projects">Projects</a>
-					</li>
-				</ul>
-			</div>
-		</nav>
-	</header>
-
-	<div class="container">
-		<div class="row" id="headerimage">
-			<section class="page col-sm-12">
-				<img src="https://s3.us-east-2.amazonaws.com/tomschutte.net/Seattle_1200_300.jpg" class="img-responsive img-rounded">
-			</section>
-		</div>
-	</div>
-
-	<div class="container">
-		<div class="row" id="Landing_text">
-			<section class="col-sm-12">
-				<h1>Hi.</h1>
-				<p>
-					My name, as you might've guessed is Tom Schutte. This website is meant mostly as a place for me to play around with NodeJS
-					and web development technologies, but feel free to look around. If you find something that is broken, insecure, or can
-					otherwise be done in a better manner, please reach out using the contact page below!
-				</p>
-				<p>
-					Feel free to explore! Check out my resume if you want to know more about my technical skills and background. Head over to
-					the project section to see some of the select cobbled together projects I have, and if you like the ramblings of someone
-					trying to record their thoughts for themselves and others then the blog section might just be for you.
-				</p>
-			</section>
-		</div>
-	</div>
-
-	<div class="container">
-		<div class="row" id="blurbs-images">
-			<section class="col-sm-4">
-				<h3 class="header">Github</h3>
-				<a href="https://github.com/tjschutte">
-					<div class="icon-div">
-						<img src="static/res/photos/landing_page/GitHub-Mark-120px-plus.png" class="img-circle img-responsive icon">
-					</div>
-				</a>
-				<p>
-					See my projects on Github. This is the best place to see what projects I am currently working on!
-				</p>
-			</section>
-			<section class="col-sm-4">
-				<h3 class="header">LinkedIn</h3>
-				<a href="https://www.linkedin.com/in/thomasschutte">
-					<div class="icon-div">
-						<img src="static/res/photos/landing_page/Logo-Black-121px-R.png" class="image-rounded img-responsive icon">
-					</div>
-				</a>
-				<p>
-					Connect with me on Linkedin, and see what I am doing.
-				</p>
-			</section>
-			<section class="col-sm-4">
-				<h3 class="header">Contact</h3>
-				<a href="contact">
-					<div class="icon-div">
-						<img src="static/res/photos/landing_page/email-icon.png" class="image-rounded img-responsive icon">
-					</div>
-				</a>
-				<p>
-					Questions? Comments? Got an Idea for how to make this place better? Feel free to drop me an email above.
-				</p>
-			</section>
-		</div>
-
-	</div>
-
-	<div class="footer navbar-fixed-bottom text-center">
-		<div class="container">
-			<div class="text-center" id="YEAR" style="padding-bottom: 15px"></div>
-		</div>
-	</div>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="static/js/common.js"></script>
+        <title>Tom Schutte</title>
+    </head>
+    <body>
+    
+        <header>
+            <nav class="navbar navbar-default navbar-fixed-top">
+                <div class="container">
+                    <div class="row">
+                        <section class="col-sm-12">
+                            <div class="container-fluid">
+                                <div class="navbar-header">
+                                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#page-header" aria-expanded="false">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    </button>
+                                    
+                                    <a class="navbar-brand" href="">Tom Schutte</a>
+                                </div>
+                                
+                                <div class="collapse navbar-collapse collapse navbar-collapse" id="page-header">
+                                    <ul class="nav navbar-nav navbar-right">
+                                        <li>
+                                            <a href="blog">Blog</a>
+                                        </li>
+                                        <li>
+                                            <a href="static/res/resume.pdf">Resume</a>
+                                        </li>
+                                        <li>
+                                            <a href="projects">Projects</a>
+                                        </li>
+                                    </ul>
+                                </div>   
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        
+        <div class="container">
+            <div class="row" id="headerimage" style="padding-top: 75px">
+                <section class="page col-sm-12">
+                    <img src="https://s3.us-east-2.amazonaws.com/tomschutte.net/Seattle_1200_300.jpg" class="img-responsive img-rounded">
+                </section>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row" id="Landing_text">
+                <section class="col-sm-12">
+                    <h1>Hi.</h1>
+                    <p>
+                        My name, as you might've guessed is Tom Schutte. This website is meant mostly as a place for me to play around with NodeJS
+                        and web development technologies, but feel free to look around. If you find something that is broken, insecure, or can
+                        otherwise be done in a better manner, please reach out using the contact page below!
+                    </p>
+                    <p>
+                        Feel free to explore! Check out my resume if you want to know more about my technical skills and background. Head over to
+                        the project section to see some of the select cobbled together projects I have, and if you like the ramblings of someone
+                        trying to record their thoughts for themselves and others then the blog section might just be for you.
+                    </p>
+                </section>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row" id="blurbs-images">
+                <section class="col-sm-4">
+                    <h3 class="header">Github</h3>
+                    <a href="https://github.com/tjschutte">
+                        <div class="icon-div">
+                            <img src="static/res/photos/landing_page/GitHub-Mark-120px-plus.png" class="img-circle img-responsive icon">
+                        </div>
+                    </a>
+                    <p>
+                        See my projects on Github. This is the best place to see what projects I am currently working on!
+                    </p>
+                </section>
+                <section class="col-sm-4">
+                    <h3 class="header">LinkedIn</h3>
+                    <a href="https://www.linkedin.com/in/thomasschutte">
+                        <div class="icon-div">
+                            <img src="static/res/photos/landing_page/Logo-Black-121px-R.png" class="image-rounded img-responsive icon">
+                        </div>
+                    </a>
+                    <p>
+                        Connect with me on Linkedin, and see what I am doing.
+                    </p>
+                </section>
+                <section class="col-sm-4">
+                    <h3 class="header">Contact</h3>
+                    <a href="contact">
+                        <div class="icon-div">
+                            <img src="static/res/photos/landing_page/email-icon.png" class="image-rounded img-responsive icon">
+                        </div>
+                    </a>
+                    <p>
+                        Questions? Comments? Got an Idea for how to make this place better? Feel free to drop me an email above.
+                    </p>
+                </section>
+            </div>
+        </div>
+        <span id="page-bottom-pad">
+        </br>
+        </br>
+        </br>
+        </span>
+        <div class="footer navbar-default navbar-fixed-bottom text-center">
+            <div class="container">
+                <div class="text-center" id="YEAR" style="padding-bottom: 15px; padding-top: 15px"></div>
+            </div>
+        </div>
+    </body>

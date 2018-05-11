@@ -1,64 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="static/css/bootstrap.min.css">
-    <link rel="stylesheet" href="static/css/styles.css">
-    <!-- Oh JQuery, may my ajax be quick. -->
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-        crossorigin="anonymous"></script>
-    <script src="static/js/common.js"></script>
-    <title>Tom Schutte - Blog</title>
-</head>
-
-<body>
-    <header>
-        <nav class="navbar navbar-default" role="navigation">
-            <div class="container">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="..">Tom Schutte</a>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="static/js/common.js"></script>
+        <title>Tom Schutte</title>
+    </head>
+    <body>
+        <header>
+            <nav class="navbar navbar-default navbar-fixed-top">
+                <div class="container">
+                    <div class="row">
+                        <section class="col-sm-12">
+                            <div class="container-fluid">
+                                <div class="navbar-header">
+                                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#page-header" aria-expanded="false">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    </button>
+                                    
+                                    <a class="navbar-brand" href="..">Tom Schutte</a>
+                                </div>
+                                
+                                <div class="collapse navbar-collapse collapse navbar-collapse" id="page-header">
+                                    <ul class="nav navbar-nav navbar-right">
+                                        <li>
+                                            <a href="blog">Blog</a>
+                                        </li>
+                                        <li>
+                                            <a href="static/res/resume.pdf">Resume</a>
+                                        </li>
+                                        <li>
+                                            <a href="projects">Projects</a>
+                                        </li>
+                                    </ul>
+                                </div>   
+                            </div>
+                        </section>
+                    </div>
                 </div>
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="blog">Blog</a>
-                    </li>
-                    <li>
-                        <a href="static/res/resume.pdf">Resume</a>
-                    </li>
-                    <li>
-                        <a href="projects">Projects</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </header>
-
-    <div class="container">
-        <div class="row" id="Landing_text">
-            <section class="col-sm-8">
-                <h1>
-                    Posts by date:
-                </h1>
-                <p>
-                    Below is a list of posts ordered by date. I don't post often, and I don't post much... But it't better than nothing!
-                </p>
-                <% posts.forEach(function(post, index) { %>
+            </nav>
+        </header>
+        <div id="header-padding" style="padding-top: 75px"></div>
+        <div class="container">
+            <div class="row" id="Landing_text">
+                <section class="col-sm-8">
+                    <h1>
+                        Posts by date:
+                    </h1>
+                    <p>
+                        Below is a list of posts ordered by date. I don't post often, and I don't post much... But it't better than nothing!
+                    </p>
+                    <% posts.forEach(function(post, index) { %>
                     <%if (post.Enabled.BOOL) { %>
                     <h3>
                         <a href="/blog/<%= post.ID.N %>/<%= post.Title.S %>"</a><%= post.Title.S %></a>
                     </h3>
                     <% } %>
-                <% }) %>
-            </section>
+                    <% }) %>
+                </section>
+            </div>
         </div>
-    </div>
-
-    <div class="footer navbar-fixed-bottom text-center">
-        <div class="container">
-            <div class="text-center" id="YEAR" style="padding-bottom: 15px"></div>
+        <span id="page-bottom-pad">
+        </br>
+        </br>
+        </br>
+        </span>
+        <div class="footer navbar-default navbar-fixed-bottom text-center">
+            <div class="container">
+                <div class="text-center" id="YEAR" style="padding-bottom: 15px; padding-top: 15px"></div>
+            </div>
         </div>
-    </div>
-</body>
+    </body>
