@@ -18,8 +18,8 @@ const contactController = require('./controllers/contact');
 const blogController = require('./controllers/blog');
 const projectsController = require('./controllers/projects');
 
-const key = fs.readFileSync('encryption/private.key');
-const cert = fs.readFileSync('encryption/server.crt' );
+const key = fs.readFileSync('/etc/letsencrypt/live/tomschutte.net/privkey.pem');
+const cert = fs.readFileSync('/etc/letsencrypt/live/tomschutte.net/fullchain.pem');
 
 var options = {
   key: key,
