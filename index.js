@@ -1,3 +1,14 @@
+console.log("Starting Node with following options:", process.argv);
+
+DEV_MODE = false
+
+if (process.argv[2] == 'dev') {
+  DEV_MODE = true
+  console.log("In development mode.")
+}
+
+console.log("DEV_MODE:", DEV_MODE)
+
 /**
  * Module dependencies.
  */
@@ -18,13 +29,16 @@ const contactController = require('./controllers/contact');
 const blogController = require('./controllers/blog');
 const projectsController = require('./controllers/projects');
 
-const key = fs.readFileSync('/etc/letsencrypt/live/tomschutte.net/privkey.pem');
-const cert = fs.readFileSync('/etc/letsencrypt/live/tomschutte.net/fullchain.pem');
+// In dev mode, we won't have these items.
+if (!DEV_MODE) {
+  const key = fs.readFileSync('encryption/private.key');
+  const cert = fs.readFileSync('encryption/server.crt' );
 
-var options = {
-  key: key,
-  cert: cert,
-};
+  var options = {
+    key: key,
+    cert: cert,
+  };
+}
 
 /**
  * Create Express server.
@@ -36,8 +50,10 @@ app.engine('html', require('ejs').renderFile);
 app.use('/static', express.static('public'));
 app.use(favicon(__dirname + '/public/res/photos/favicon.ico'));
 
-// Force us to use https
-app.use(forceSsl);
+// Force us to use https only when in prod
+if (!DEV_MODE) {
+  app.use(forceSsl);
+}
 
 /** bodyParser.urlencoded(options)
 * Parses the text as URL encoded data (which is how browsers tend to send form data from regular forms set to POST)
@@ -65,7 +81,12 @@ app.get('/blog/*', blogController.getBlogPost);
 // 404 page
 app.get('*', indexController.pagenotfound);
 
-https.createServer(options, app).listen(443);
+// If prod, then force https, else use http
+if (!DEV_MODE) {
+  https.createServer(options, app).listen(443);
+}
+
 http.createServer(app).listen(80);
-console.log('Express server listening');
+
+console.log('Server ready');
 module.exports = app;
